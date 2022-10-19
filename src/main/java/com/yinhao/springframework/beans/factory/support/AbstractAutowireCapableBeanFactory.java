@@ -1,7 +1,11 @@
 package com.yinhao.springframework.beans.factory.support;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.yinhao.springframework.beans.BeansException;
+import com.yinhao.springframework.beans.PropertyValue;
+import com.yinhao.springframework.beans.PropertyValues;
 import com.yinhao.springframework.beans.factory.config.BeanDefinition;
+import com.yinhao.springframework.beans.factory.config.BeanReference;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -19,11 +23,37 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
+            applyPropertyValues(beanName, bean, beanDefinition);
         } catch (Exception e) {
             throw new BeansException("实例化bean失败", e);
         }
         addSingleton(beanName, bean);
         return bean;
+    }
+
+    /**
+     * bean 属性填充
+     * @param beanName
+     * @param bean
+     * @param beanDefinition
+     */
+    protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                String name = propertyValue.getName();
+                Object value = propertyValue.getValue();
+                if (value instanceof BeanReference) {
+                    // 获取属性bean的实例化
+                    value = getBean(((BeanReference)value).getBeanName());
+                }
+                // 属性填充
+                BeanUtil.setFieldValue(bean, name, value);
+            }
+        } catch (Exception e) {
+            throw new BeansException("bean属性填充错误:" + beanName);
+        }
+
     }
 
 

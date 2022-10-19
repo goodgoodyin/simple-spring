@@ -2,9 +2,13 @@ package com.yinhao.springframework.test;
 
 //import com.yinhao.springframework.BeanDefinition;
 //import com.yinhao.springframework.BeanFactory;
+import com.yinhao.springframework.beans.PropertyValue;
+import com.yinhao.springframework.beans.PropertyValues;
 import com.yinhao.springframework.beans.factory.BeanFactory;
 import com.yinhao.springframework.beans.factory.config.BeanDefinition;
+import com.yinhao.springframework.beans.factory.config.BeanReference;
 import com.yinhao.springframework.beans.factory.support.DefaultListableBeanFactory;
+import com.yinhao.springframework.test.bean.UserDao;
 import com.yinhao.springframework.test.bean.UserService;
 import org.junit.Test;
 
@@ -43,6 +47,28 @@ public class ApiTest {
         // 3、获取bean
         UserService userService = (UserService) beanFactory.getBean(BEAN_NAME, "GoodYin");
         userService.queryUserInfo();
+    }
+
+    @Test
+    public void test_BeanFactoryReference() {
+        // 1、初始化
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+
+        // 2、UserDao注册
+        beanFactory.registerBeanDefinition("userDao", new BeanDefinition(UserDao.class));
+
+        // 3、UserService 设置属性
+        PropertyValues propertyValues = new PropertyValues();
+        propertyValues.addPropertyValue(new PropertyValue("id", "0001"));
+        propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
+
+        // 4、UserService注入bean
+        BeanDefinition beanDefinition = new BeanDefinition(UserService.class, propertyValues);
+        beanFactory.registerBeanDefinition(BEAN_NAME, beanDefinition);
+
+        // 5、UserService获取bean
+        UserService userService = (UserService) beanFactory.getBean(BEAN_NAME);
+        userService.queryUserInfoReference();
     }
 
 
