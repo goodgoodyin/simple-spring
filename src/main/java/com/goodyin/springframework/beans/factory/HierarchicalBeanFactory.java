@@ -1,4 +1,4 @@
 package com.goodyin.springframework.beans.factory;
 
-public class HierarchicalBeanFactory {
+public interface HierarchicalBeanFactory extends BeanFactory{
 }

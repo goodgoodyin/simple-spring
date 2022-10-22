@@ -4,7 +4,9 @@
 
     <bean id = "UserService" class="com.goodyin.springframework.test.bean.UserService">
         <property name = "id" value = "0001"/>
+        <property name = "name" value = "李四"/>
+        <property name = "location" value = "深圳"/>
         <property name = "userDao" ref = "userDao"/>
-
     </bean>
+
 </beans>
