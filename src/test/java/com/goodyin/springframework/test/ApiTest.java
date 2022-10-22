@@ -6,6 +6,7 @@ import cn.hutool.core.io.IoUtil;
 import com.goodyin.springframework.beans.factory.config.BeanDefinition;
 import com.goodyin.springframework.beans.factory.config.BeanReference;
 import com.goodyin.springframework.beans.factory.support.DefaultListableBeanFactory;
+import com.goodyin.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import com.goodyin.springframework.core.io.DefaultResourceLoader;
 import com.goodyin.springframework.core.io.Resource;
 import com.goodyin.springframework.test.bean.UserDao;
@@ -97,6 +98,20 @@ public class ApiTest {
     @Test
     public void test_file() throws IOException {
         getResource("src/test/resources/important.properties");
+    }
+
+    @Test
+    public void test_xml(){
+
+        // 1、初始化 beanFactory
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        // 2、读取配置文件注册bean
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        reader.loadBeanDefinitions("classpath:spring.xml");
+        // 3、获取bean对象调用方法
+        UserService userService = beanFactory.getBean(BEAN_NAME, UserService.class);
+        userService.queryUserInfoReference();
+
     }
 
 //    @Test
