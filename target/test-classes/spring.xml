@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans>
+    <bean id = "userDap" class = "com.goodyin.springframework.test.bean.UserDao"/>
+
+    <bean id = "userService" class="com.goodyin.springframework.test.bean.UserService">
+        <property name = "id" value = "0001"/>
+        <property name = "userDao" ref = "userDao"/>
+
+    </bean>
+</beans>

@@ -75,6 +75,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     public InstantiationStrategy getInstantiationStrategy() {
         return instantiationStrategy;
     }
+
     public void setInstantiationStrategy(InstantiationStrategy instantiationStrategy){
         this.instantiationStrategy = instantiationStrategy;
     }

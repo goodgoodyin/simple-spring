@@ -2,14 +2,21 @@ package com.goodyin.springframework.test;
 
 //import com.yinhao.springframework.BeanDefinition;
 //import com.yinhao.springframework.BeanFactory;
+import cn.hutool.core.io.IoUtil;
 import com.goodyin.springframework.beans.factory.config.BeanDefinition;
 import com.goodyin.springframework.beans.factory.config.BeanReference;
 import com.goodyin.springframework.beans.factory.support.DefaultListableBeanFactory;
+import com.goodyin.springframework.core.io.DefaultResourceLoader;
+import com.goodyin.springframework.core.io.Resource;
 import com.goodyin.springframework.test.bean.UserDao;
 import com.goodyin.springframework.test.bean.UserService;
 import com.goodyin.springframework.beans.PropertyValue;
 import com.goodyin.springframework.beans.PropertyValues;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ApiTest {
 
@@ -70,6 +77,27 @@ public class ApiTest {
         userService.queryUserInfoReference();
     }
 
+    private DefaultResourceLoader resourceLoader;
+
+    @Before
+    public void init() {
+        resourceLoader = new DefaultResourceLoader();
+    }
+
+    @Test
+    public void test_classpath() throws IOException {
+        getResource("classpath:important.properties");
+    }
+    private void getResource(String path) throws IOException {
+        Resource resource = resourceLoader.getResource(path);
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
+    @Test
+    public void test_file() throws IOException {
+        getResource("src/test/resources/important.properties");
+    }
 
 //    @Test
 //    public void testBeanFactory() {
