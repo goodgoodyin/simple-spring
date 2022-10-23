@@ -16,6 +16,7 @@ import com.goodyin.springframework.beans.PropertyValue;
 import com.goodyin.springframework.beans.PropertyValues;
 import com.goodyin.springframework.test.common.MyBeanFactoryPostProcessor;
 import com.goodyin.springframework.test.common.MyBeanPostProcessor;
+import com.goodyin.springframework.test.event.CustomEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.openjdk.jol.info.ClassLayout;
@@ -198,6 +199,14 @@ public class ApiTest {
         UserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
         userService.queryUserInfoReference();
     }
+
+    @Test
+    public void test_event() {
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        classPathXmlApplicationContext.publishEvent(new CustomEvent(classPathXmlApplicationContext, 123L, "成功"));
+        classPathXmlApplicationContext.registerShutdownHook();
+    }
+
 
 //    @Test
 //    public void testBeanFactory() {
