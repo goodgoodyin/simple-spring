@@ -87,6 +87,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             String className = bean.getAttribute("class");
             String initMethod = bean.getAttribute("init-method");
             String destroyMethod = bean.getAttribute("destroy-method");
+            String beanScope = bean.getAttribute("scope");
 
             Class<?> clazz = Class.forName(className);
             // 获取bean名称，优先级 id > name
@@ -103,6 +104,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             BeanDefinition beanDefinition = new BeanDefinition(clazz);
             beanDefinition.setInitMethodName(initMethod);
             beanDefinition.setDestroyMethodName(destroyMethod);
+            if (StrUtil.isNotEmpty(beanScope)) {
+                beanDefinition.setScope(beanScope);
+            }
             // 属性填充
             for (int j = 0; j < bean.getChildNodes().getLength(); j ++) {
                 Node item = bean.getChildNodes().item(j);
@@ -114,9 +118,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 String attrName = property.getAttribute("name");
                 String attrValue = property.getAttribute("value");
                 String attrRef = property.getAttribute("ref");
-                // 获取属性值：引入对象、值对象
-                // todo 不大理解这句
-                Object value = StrUtil.isNotEmpty(attrRef) ? new BeanReference(attrName) : attrValue;
+                // 获取属性值：引入对象、值对象, 如果设置里ref说明是bean属性
+                Object value = StrUtil.isNotEmpty(attrRef) ? new BeanReference(attrRef) : attrValue;
                 // 创建属性信息
                 PropertyValue propertyValue = new PropertyValue(attrName, value);
                 beanDefinition.getPropertyValues().addPropertyValue(propertyValue);

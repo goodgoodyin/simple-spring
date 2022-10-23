@@ -18,6 +18,8 @@ import com.goodyin.springframework.test.common.MyBeanFactoryPostProcessor;
 import com.goodyin.springframework.test.common.MyBeanPostProcessor;
 import org.junit.Before;
 import org.junit.Test;
+import org.openjdk.jol.info.ClassLayout;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -169,8 +171,32 @@ public class ApiTest {
 
         UserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
         userService.queryUserInfoReference();
-        System.out.println(userService.getApplicationContext());
-        System.out.println(userService.getBeanFactory());
+//        System.out.println(userService.getApplicationContext());
+//        System.out.println(userService.getBeanFactory());
+    }
+
+    @Test
+    public void test_prototype() {
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        classPathXmlApplicationContext.registerShutdownHook();
+
+        UserService userService1 = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
+        UserService userService2 = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
+
+        System.out.println(userService1);
+        System.out.println(userService2);
+
+        System.out.println(userService1 + "十六进制哈希" + Integer.toHexString(userService1.hashCode()));
+        System.out.println(ClassLayout.parseInstance(userService1));
+    }
+
+    @Test
+    public void test_factory_bean() {
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        classPathXmlApplicationContext.registerShutdownHook();
+
+        UserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
+        userService.queryUserInfoReference();
     }
 
 //    @Test
