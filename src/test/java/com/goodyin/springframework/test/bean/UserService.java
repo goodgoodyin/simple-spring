@@ -1,9 +1,15 @@
 package com.goodyin.springframework.test.bean;
 
-import com.goodyin.springframework.beans.factory.DisposableBean;
-import com.goodyin.springframework.beans.factory.InitializingBean;
+import com.goodyin.springframework.beans.BeansException;
+import com.goodyin.springframework.beans.factory.*;
+import com.goodyin.springframework.context.ApplicationContext;
+import com.goodyin.springframework.context.ApplicationContextAware;
 
-public class UserService implements InitializingBean, DisposableBean {
+public class UserService implements BeanNameAware, BeanClassLoadAware, BeanFactoryAware ,ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
+    private BeanFactory beanFactory;
+
 
     private String name;
 
@@ -62,12 +68,30 @@ public class UserService implements InitializingBean, DisposableBean {
     }
 
     @Override
-    public void destroy() throws Exception {
-        System.out.println("执行 UserService.destroy");
+    public void setBeanClassLoad(ClassLoader classLoader) {
+        System.out.println("ClassLoader : " + classLoader);
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("执行UserService.afterPropertiesSet");
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        System.out.println("Bean Name :" + name);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    public BeanFactory getBeanFactory() {
+        return beanFactory;
     }
 }

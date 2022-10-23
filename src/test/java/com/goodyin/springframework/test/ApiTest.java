@@ -162,6 +162,17 @@ public class ApiTest {
         userService.queryUserInfoReference();
     }
 
+    @Test
+    public void test_xml_aware() {
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        classPathXmlApplicationContext.registerShutdownHook();
+
+        UserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
+        userService.queryUserInfoReference();
+        System.out.println(userService.getApplicationContext());
+        System.out.println(userService.getBeanFactory());
+    }
+
 //    @Test
 //    public void testBeanFactory() {
 //        // 1、初始化 BeanFactory

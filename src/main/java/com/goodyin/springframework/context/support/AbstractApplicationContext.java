@@ -5,6 +5,7 @@ import com.goodyin.springframework.beans.BeansException;
 import com.goodyin.springframework.beans.factory.ConfigurableListableBeanFactory;
 import com.goodyin.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import com.goodyin.springframework.beans.factory.config.BeanPostProcessor;
+import com.goodyin.springframework.context.ApplicationContextAware;
 import com.goodyin.springframework.context.ConfigurableApplicationContext;
 import com.goodyin.springframework.core.io.DefaultResourceLoader;
 
@@ -23,6 +24,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
         // 2、获取 BeanFactory
         ConfigurableListableBeanFactory beanFactory = getBeanFactory();
+
+        // 3、添加ApplicationContextAwareProcessor
+        beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
 
         // 3、在bean实例化前，执行BeanFactoryProcessor
         invokeBeanFactoryPostProcessors(beanFactory);
