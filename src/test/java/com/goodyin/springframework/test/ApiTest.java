@@ -152,6 +152,16 @@ public class ApiTest {
         userService1.queryUserInfoReference();
     }
 
+    @Test
+    public void test_initAndDestroyMethod() {
+        // 1、初始化 BeanFactory
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        classPathXmlApplicationContext.registerShutdownHook();
+        // 2、获取Bean对象
+        UserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, UserService.class);
+        userService.queryUserInfoReference();
+    }
+
 //    @Test
 //    public void testBeanFactory() {
 //        // 1、初始化 BeanFactory

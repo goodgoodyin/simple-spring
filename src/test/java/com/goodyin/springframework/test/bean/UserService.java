@@ -1,6 +1,9 @@
 package com.goodyin.springframework.test.bean;
 
-public class UserService {
+import com.goodyin.springframework.beans.factory.DisposableBean;
+import com.goodyin.springframework.beans.factory.InitializingBean;
+
+public class UserService implements InitializingBean, DisposableBean {
 
     private String name;
 
@@ -56,5 +59,15 @@ public class UserService {
                 ", id='" + id + '\'' +
                 ", location='" + location + '\'' +
                 '}';
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("执行 UserService.destroy");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("执行UserService.afterPropertiesSet");
     }
 }
