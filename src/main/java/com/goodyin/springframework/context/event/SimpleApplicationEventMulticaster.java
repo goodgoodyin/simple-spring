@@ -5,6 +5,9 @@ import com.goodyin.springframework.beans.factory.BeanFactory;
 import com.goodyin.springframework.context.ApplicationEvent;
 import com.goodyin.springframework.context.ApplicationListener;
 
+/**
+ * 事件广播器
+ */
 public class SimpleApplicationEventMulticaster extends AbstractApplicationEventMulticaster {
 
     public SimpleApplicationEventMulticaster(BeanFactory beanFactory) {

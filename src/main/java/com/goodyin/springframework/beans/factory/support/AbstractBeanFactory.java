@@ -45,7 +45,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     }
 
     /**
-     *  如果是FactoryBean，获取FactoryBean
+     *  如果当前bean是继承了FactoryBean，获取FactoryBean自定的Object
      * @param beanInstance
      * @param beanName
      * @return

@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
+ * 自动化处理bean工厂配置的接口
  * 实例化bean
  */
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
@@ -28,8 +29,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
+            // 属性填充
             applyPropertyValues(beanName, bean, beanDefinition);
-            // 执行bean对初始化防范和beanPostProcessor对前置和后置处理方法
+            // 执行bean对初始化方法和beanPostProcessor对前置和后置处理方法
             bean = initializeBean(beanName, bean, beanDefinition);
         } catch (Exception e) {
             throw new BeansException("实例化bean失败", e);
@@ -95,7 +97,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         // 1、 执行BeanPostProcessor Before 处理
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 
-        // 执行bean对象的初识方法
+        // 执行bean对象的初始方法
         try {
             invokeInitMethod(beanName, wrappedBean, beanDefinition);
         } catch (Exception e) {

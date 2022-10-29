@@ -6,7 +6,7 @@ import com.goodyin.springframework.core.io.ResourceLoader;
 /**
  * 实现 BeanDefinitionReader
  */
-public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader{
+public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader {
 
     private final BeanDefinitionRegistry registry;
 

@@ -7,7 +7,7 @@ import com.goodyin.springframework.beans.factory.support.DefaultListableBeanFact
 /**
  * 获取Bean工厂和加载资源
  */
-public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext{
+public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
 
     private DefaultListableBeanFactory beanFactory;
 

@@ -5,9 +5,10 @@ import com.goodyin.springframework.beans.BeansException;
 import java.util.Map;
 
 /**
+ * 扩展 工厂接口 的接口
  * 根据类型获取bean实例
  */
-public interface ListableBeanFactory extends BeanFactory{
+public interface ListableBeanFactory extends BeanFactory {
 
     /**
      * 按照类型返回 Bean 实例

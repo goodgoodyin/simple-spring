@@ -10,7 +10,7 @@ import java.io.InputStream;
 /**
  * 通过类路径加载类
  */
-public class ClassPathResource implements Resource{
+public class ClassPathResource implements Resource {
 
     private final String path;
 

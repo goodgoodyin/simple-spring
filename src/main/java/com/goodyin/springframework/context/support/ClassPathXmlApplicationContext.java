@@ -3,7 +3,7 @@ package com.goodyin.springframework.context.support;
 /**
  * 应用上下文实现类
  */
-public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext{
+public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext {
 
     /**
      * 配置文件地址
@@ -22,7 +22,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
     }
 
     /**
-     * 从xml中加载BeanDefinition，并刷新上下文
+     * 从xml中加载BeanDefinition，上下文
      * @param configurations
      */
     public ClassPathXmlApplicationContext(String[] configurations) {

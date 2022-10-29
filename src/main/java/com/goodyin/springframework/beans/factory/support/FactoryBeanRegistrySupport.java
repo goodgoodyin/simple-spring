@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * FactoryBean 注册
  */
-public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanRegistry{
+public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanRegistry {
 
     private final Map<String, Object> factoryBeanObjectCache = new ConcurrentHashMap<>();
 

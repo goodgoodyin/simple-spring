@@ -1,7 +1,7 @@
 package com.goodyin.springframework.beans.factory;
 
 /**
- * 对象创建
+ * 自定义对象创建接口
  * @param <T>
  */
 public interface FactoryBean<T> {

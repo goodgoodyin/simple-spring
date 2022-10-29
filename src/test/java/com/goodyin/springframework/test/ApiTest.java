@@ -29,6 +29,13 @@ public class ApiTest {
 
     private static final String BEAN_NAME = "UserService";
 
+    /**
+     * 创建简单的bean容器
+     * 1、初始化BeanFactory
+     * 2、注册bean（把bean名称放到beanDefinitionMap）
+     * 3、获取bean（从singletonObjects中获取，如果没有则创建实例）
+     * https://docs.qq.com/flowchart/DUFV6bXZ3QmtmSUlK?u=51999a373d5d47e9bb7a958a3f326fe6
+     */
     @Test
     public void test_BeanFactory() {
 
@@ -48,6 +55,9 @@ public class ApiTest {
         userServiceSingleton.queryUserInfo();
     }
 
+    /**
+     * 有带参数构造函数bean实例化
+     */
     @Test
     public void test_BeanFactoryArgs() {
         // 1、初始化 BeanFactory
@@ -62,6 +72,10 @@ public class ApiTest {
         userService.queryUserInfo();
     }
 
+    /**
+     * 注入属性和依赖对象
+     * https://docs.qq.com/flowchart/DUHRYbGVrb2pYVkx6?u=51999a373d5d47e9bb7a958a3f326fe6
+     */
     @Test
     public void test_BeanFactoryReference() {
         // 1、初始化
@@ -91,6 +105,10 @@ public class ApiTest {
         resourceLoader = new DefaultResourceLoader();
     }
 
+    /**
+     * 类路径资源获取
+     * @throws IOException
+     */
     @Test
     public void test_classpath() throws IOException {
         getResource("classpath:important.properties");
@@ -101,11 +119,23 @@ public class ApiTest {
         String content = IoUtil.readUtf8(inputStream);
         System.out.println(content);
     }
+
+    /**
+     * 文件资源获取
+     * @throws IOException
+     */
     @Test
     public void test_file() throws IOException {
         getResource("src/test/resources/important.properties");
     }
 
+    /**
+     * 解析xml把bean对象注册到spring
+     * 1、初始化BeanFactory
+     * 2、读取xml注册bean（把bean名称放到beanDefinitionMap）
+     * 3、获取bean（从singletonObjects中获取，如果没有则创建实例）
+     * https://docs.qq.com/flowchart/DUGpDemRJQWJPa1J6?u=51999a373d5d47e9bb7a958a3f326fe6
+     */
     @Test
     public void test_xml(){
 
@@ -139,6 +169,12 @@ public class ApiTest {
 
     }
 
+    /**
+     * 实现应用上下文
+     * 把初始化BeanFactory、读取xml注册bean都放到refresh刷新上下文里面
+     * 并在实例化之前加修改bean按定义信息和对扩展实例化信息接口进行注册（在执行实例化之前之后执行其之前之后方法）
+     * https://docs.qq.com/flowchart/DUHNDTHJwcmJIYVdU?u=51999a373d5d47e9bb7a958a3f326fe6
+     */
     @Test
     public void test_xml_context() {
 
@@ -155,6 +191,9 @@ public class ApiTest {
         userService1.queryUserInfoReference();
     }
 
+    /**
+     * bean对象的初始化和销毁
+     */
     @Test
     public void test_initAndDestroyMethod() {
         // 1、初始化 BeanFactory
@@ -165,6 +204,9 @@ public class ApiTest {
         userService.queryUserInfoReference();
     }
 
+    /**
+     * aware接口实现
+     */
     @Test
     public void test_xml_aware() {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
@@ -176,6 +218,9 @@ public class ApiTest {
 //        System.out.println(userService.getBeanFactory());
     }
 
+    /**
+     * 原型创建
+     */
     @Test
     public void test_prototype() {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
@@ -191,6 +236,9 @@ public class ApiTest {
         System.out.println(ClassLayout.parseInstance(userService1));
     }
 
+    /**
+     * 自定义bean
+     */
     @Test
     public void test_factory_bean() {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
@@ -200,6 +248,12 @@ public class ApiTest {
         userService.queryUserInfoReference();
     }
 
+    /**
+     * 容器事件监听
+     *  1、 在刷新容器完成容器刷新的时候会发布ContextRefreshedEvent事件
+     *  2、 自定义事件需要在初始化BeanFactory后手动调用一下publishEvent方法
+     *  3、 关闭事件在调用registerShutdownHook之后在最后容器关闭的时候执行
+     */
     @Test
     public void test_event() {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");

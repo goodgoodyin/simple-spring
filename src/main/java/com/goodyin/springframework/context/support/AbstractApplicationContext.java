@@ -6,7 +6,6 @@ import com.goodyin.springframework.beans.factory.ConfigurableListableBeanFactory
 import com.goodyin.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import com.goodyin.springframework.beans.factory.config.BeanPostProcessor;
 import com.goodyin.springframework.beans.factory.config.ConfigurableBeanFactory;
-import com.goodyin.springframework.context.ApplicationContextAware;
 import com.goodyin.springframework.context.ApplicationEvent;
 import com.goodyin.springframework.context.ApplicationListener;
 import com.goodyin.springframework.context.ConfigurableApplicationContext;
@@ -29,6 +28,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
     private ApplicationEventMulticaster applicationEventMulticaster;
 
+    /**
+     * 刷新上下文
+     * @throws BeansException
+     */
     @Override
     public void refresh() throws BeansException {
         // 1、创建 BeanFactory，并加载BeanDefinition

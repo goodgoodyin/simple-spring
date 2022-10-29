@@ -1,4 +1,8 @@
 package com.goodyin.springframework.beans.factory;
 
-public interface HierarchicalBeanFactory extends BeanFactory{
+/**
+ * 提供可以获取父类BeanFactory
+ * 属于扩展工厂乘次的子接口
+ */
+public interface HierarchicalBeanFactory extends BeanFactory {
 }
