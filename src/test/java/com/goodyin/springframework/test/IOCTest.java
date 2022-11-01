@@ -25,7 +25,7 @@ import org.openjdk.jol.info.ClassLayout;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ApiTest {
+public class IOCTest {
 
     private static final String BEAN_NAME = "UserService";
 
