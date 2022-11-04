@@ -11,9 +11,9 @@
 <!--    </bean>-->
 
 <!--    <bean id="proxyUserDao" class="com.goodyin.springframework.test.bean.ProxyBeanFactory"/>-->
-    <bean class = "com.goodyin.springframework.test.event.CustomEventListener"/>
-    <bean class = "com.goodyin.springframework.test.event.CustomEvent"/>
-    <bean class = "com.goodyin.springframework.test.event.ContextClosedEventListener"/>
-    <bean class = "com.goodyin.springframework.test.event.ContextRefreshedEventListener"/>
+<!--    <bean class = "com.goodyin.springframework.test.event.CustomEventListener"/>-->
+<!--    <bean class = "com.goodyin.springframework.test.event.CustomEvent"/>-->
+<!--    <bean class = "com.goodyin.springframework.test.event.ContextClosedEventListener"/>-->
+<!--    <bean class = "com.goodyin.springframework.test.event.ContextRefreshedEventListener"/>-->
 
 </beans>

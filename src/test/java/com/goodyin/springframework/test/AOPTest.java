@@ -59,4 +59,13 @@ public class AOPTest {
         IAUserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, IAUserService.class);
         System.out.println("测试结果" + userService.queryUserInfo());
     }
+
+    @Test
+    public void test_property_and_scan() {
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath:spring-property.xml");
+        IAUserService userService = classPathXmlApplicationContext.getBean(BEAN_NAME, IAUserService.class);
+        System.out.println("占位符测试结果" + userService);
+        System.out.println("包扫描测试结果" + userService.queryUserInfo());
+    }
+
 }

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <beans>
 
-    <bean id = "aUserService" class="com.goodyin.springframework.test.bean.aop.AUserService"/>
+<!--    <bean id = "aUserService" class="com.goodyin.springframework.test.bean.aop.AUserService"/>-->
 
-    <bean class="com.goodyin.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+<!--    <bean class="com.goodyin.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>-->
 
-    <bean id="beforeAdvice" class = "com.goodyin.springframework.test.bean.aop.AUserServiceBeforeAdvice"/>
+<!--    <bean id="beforeAdvice" class = "com.goodyin.springframework.test.bean.aop.AUserServiceBeforeAdvice"/>-->
 
-    <bean id = "methodInterceptor" class="com.goodyin.springframework.adapter.MethodBeforeAdviceInterceptor">
-        <property name = "advice" ref = "beforeAdvice"/>
-    </bean>
+<!--    <bean id = "methodInterceptor" class="com.goodyin.springframework.adapter.MethodBeforeAdviceInterceptor">-->
+<!--        <property name = "advice" ref = "beforeAdvice"/>-->
+<!--    </bean>-->
 
-    <bean id = "pointcutAdvisor" class = "com.goodyin.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
-        <property name = "expression" value = "execution(* com.goodyin.springframework.test.bean.aop.IAUserService.*(..))"/>
-        <property name = "advice" ref = "methodInterceptor"/>
-    </bean>
+<!--    <bean id = "pointcutAdvisor" class = "com.goodyin.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">-->
+<!--        <property name = "expression" value = "execution(* com.goodyin.springframework.test.bean.aop.IAUserService.*(..))"/>-->
+<!--        <property name = "advice" ref = "methodInterceptor"/>-->
+<!--    </bean>-->
 
 </beans>

@@ -1,8 +1,13 @@
 package com.goodyin.springframework.test.bean.aop;
 
+import com.goodyin.springframework.context.annotation.Component;
+
 import java.util.Random;
 
+@Component("aUserService")
 public class AUserService implements IAUserService {
+
+    private String token;
 
     public String queryUserInfo() {
         try {
@@ -20,5 +25,20 @@ public class AUserService implements IAUserService {
             e.printStackTrace();
         }
         return "注册用户" + userName + "成功";
+    }
+
+    @Override
+    public String toString() {
+        return "AUserService{" +
+                "token='" + token + '\'' +
+                '}';
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
