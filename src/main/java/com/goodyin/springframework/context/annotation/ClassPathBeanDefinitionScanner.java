@@ -1,6 +1,7 @@
 package com.goodyin.springframework.context.annotation;
 
 import cn.hutool.core.util.StrUtil;
+import com.goodyin.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import com.goodyin.springframework.beans.factory.config.BeanDefinition;
 import com.goodyin.springframework.beans.factory.support.BeanDefinitionRegistry;
 
@@ -29,6 +30,9 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
                 registry.registerBeanDefinition(determineBeanName(beanDefinition), beanDefinition);
             }
         }
+        // 注册处理注解的 BeanPostProcessor （@Autowired、@Value）
+        registry.registerBeanDefinition("com.goodyin.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor",
+                new BeanDefinition(AutowiredAnnotationBeanPostProcessor.class));
     }
 
     /**

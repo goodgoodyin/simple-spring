@@ -68,4 +68,11 @@ public class AOPTest {
         System.out.println("包扫描测试结果" + userService.queryUserInfo());
     }
 
+    @Test
+    public void test_annotation_scan() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring-property.xml");
+        IAUserService userService = applicationContext.getBean(BEAN_NAME, IAUserService.class);
+        System.out.println("测试结果：" + userService.queryUserInfo());
+    }
+
 }

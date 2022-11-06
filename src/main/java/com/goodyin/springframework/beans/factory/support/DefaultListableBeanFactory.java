@@ -4,9 +4,7 @@ import com.goodyin.springframework.beans.BeansException;
 import com.goodyin.springframework.beans.factory.ConfigurableListableBeanFactory;
 import com.goodyin.springframework.beans.factory.config.BeanDefinition;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * bean工厂的默认实现
@@ -54,6 +52,21 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
             }
         });
         return result;
+    }
+
+    @Override
+    public <T> T getBean(Class<T> requiredType) throws BeansException {
+        List<String> beanNames = new ArrayList<>();
+        for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
+            Class beanClass = entry.getValue().getBeanClass();
+            if (requiredType.isAssignableFrom(beanClass)) {
+                beanNames.add(entry.getKey());
+            }
+        }
+        if (1 == beanNames.size()) {
+            return getBean(beanNames.get(0), requiredType);
+        }
+        throw  new BeansException(requiredType + "单例没有找到" + beanNames.size() + ":" + beanNames);
     }
 
 }
