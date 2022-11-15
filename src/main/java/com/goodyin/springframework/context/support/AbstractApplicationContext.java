@@ -34,7 +34,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
      */
     @Override
     public void refresh() throws BeansException {
-        // 1、创建 BeanFactory，并加载BeanDefinition（xml解析、@Component注解）
+        // 1、创建 BeanFactory，并加载BeanDefinition（xml解析、加载@Component注解解析的处理器AutowiredAnnotationBeanPostProcessor）
         refreshBeanFactory();
 
         // 2、获取 BeanFactory

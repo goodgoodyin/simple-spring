@@ -20,6 +20,14 @@ public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareB
         this.beanFactory = (ConfigurableBeanFactory) beanFactory;
     }
 
+    /**
+     * 注解注入实现
+     * @param propertyValues
+     * @param bean
+     * @param beanName
+     * @return
+     * @throws BeansException
+     */
     @Override
     public PropertyValues postProcessPropertyValues(PropertyValues propertyValues, Object bean, String beanName) throws BeansException {
         // 1、处理注解 @Value
