@@ -30,7 +30,7 @@ public class Cglib2ApoProxy implements AopProxy {
         return enhancer.create();
     }
 
-    private static class DynamicAdvisedInterceptor implements MethodInterceptor{
+    private static class DynamicAdvisedInterceptor implements MethodInterceptor {
 
         private final AdvisedSupport advisedSupport;
 

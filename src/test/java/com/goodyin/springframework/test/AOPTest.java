@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 
 public class AOPTest {
 
+    // 需要拦截的路径范围表达式
     private static final String EXECUTION = "execution(* com.goodyin.springframework.test.bean.aop.IAUserService.*(..))";
 
     /**
@@ -28,8 +29,13 @@ public class AOPTest {
         Class<UserService> userServiceClass = UserService.class;
         Method queryUserInfo = userServiceClass.getDeclaredMethod("queryUserInfo");
 
-        System.out.println(aspectJExpressionPointcut.matches(userServiceClass));
-        System.out.println(aspectJExpressionPointcut.matches(queryUserInfo, userServiceClass));
+        // 类是否能匹配上
+        boolean matches = aspectJExpressionPointcut.matches(userServiceClass);
+        System.out.println(matches);
+
+        // 方法是否能匹配上
+        boolean matchesMethod = aspectJExpressionPointcut.matches(queryUserInfo, userServiceClass);
+        System.out.println();
     }
 
     @Test
@@ -39,14 +45,18 @@ public class AOPTest {
 
         // 组装代理对象
         AdvisedSupport advisedSupport = new AdvisedSupport();
+        // 被代理的目标对象
         advisedSupport.setTargetSource(new TargetSource(userService));
+        // 被代理的目标对象
         advisedSupport.setMethodInterceptor(new UserServiceInterceptor());
+        // 方法匹配器
         advisedSupport.setMethodMatcher(new AspectJExpressionPointcut(EXECUTION));
 
         // jdk代理对象
         IAUserService jdkProxy = (IAUserService) new JdkDynamicAopProxy(advisedSupport).getProxy();
         System.out.println("jdk:" + jdkProxy.queryUserInfo());
 
+        // cglib代理对象
         IAUserService cglibProxy = (IAUserService) new Cglib2ApoProxy(advisedSupport).getProxy();
         System.out.println("cglib:" + cglibProxy.register("ah"));
     }

@@ -24,6 +24,13 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
         this.beanFactory = (DefaultListableBeanFactory) beanFactory;
     }
 
+    /**
+     * 匹配路径，生成动态代理
+     * @param beanClass
+     * @param beanName
+     * @return
+     * @throws BeansException
+     */
     @Override
     public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
         if (isInfrastructureClass(beanClass)) {

@@ -9,6 +9,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * JDK动态代理
+ * InvocationHandler接口：Proxy执行拦截方法的接口
  */
 public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
 
